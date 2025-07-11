@@ -1,34 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  const [date, setDate] = useState('');
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
+
+  const getImage = async () => {
+    const response = await fetch("http://localhost:5036/api/getImage", {
+      method: "GET",
+      headers: {"Content-Type": "application/json"}
+    });
+
+    if(response.ok){
+      const data = await response.json();
+    
+      setDate(data.date);
+      setTitle(data.title);
+      setDesc(data.explanation);
+      setImgUrl(data.url);
+    }
+
+    console.log("Failed to fetch from api.");
+  }
+
+  useEffect(() => {
+    getImage();
+  },[]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app-container">
+      <div 
+        className="background-image" 
+        style={{ backgroundImage: `url(${imgUrl})` }} 
+      />
+      <div className='container'>
+        <div className='header-container'>
+          <h1>{title}</h1>
+          <p>{date}</p>
+        </div>
+        <div className='img-container'>
+          <img src={imgUrl} alt={title} className="media-item"></img>
+        </div>
+        <div className='footer'>
+          {desc}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
