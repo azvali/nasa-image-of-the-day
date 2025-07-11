@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "6YtR9CCkqv0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\azval\\Desktop\\nasa-image-of-the-day\\server\\server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\azval\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.7\\microsoft.aspnetcore.openapi.9.0.7.nupkg.sha512",
+    "C:\\Users\\azval\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
